@@ -1,0 +1,56 @@
+<div class="container">
+  <form class="mt-5 pt-4 pb-4" [formGroup]="profileForm" (ngSubmit)="onSave()">
+    <div class="row justify-content-center">
+      <h1 class="text-center">Profile</h1>
+      <div class="form-group row w-50 mt-4">
+        <label for="name" class="col-md-4 col-form-label">Full Name:</label>
+        <div class="col-md-7">
+          <input type="text" id="name" class="form-control" formControlName="name">
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-4 mb-4">
+      <div class="form-group row w-50  ">
+        <label for="gender" class="col-md-4">Gender: </label>
+        <div class="radio col-md-3" *ngFor="let gender of genders">
+          <label>
+            <input type="radio" id="gender" [value]="gender" formControlName="gender" (change)="onSelectGender()">
+            {{gender}}
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mt-4 mb-4">
+      <div class="form-group row w-50  ">
+        <label for="date" class="col-md-4 col-form-label">Date of Birth: </label>
+        <div class=" col-md-7 ">
+          <div class="input-group">
+            <input class="form-control" id="date" ngbDatepicker #date="ngbDatepicker" formControlName="date">
+
+            <button class="input-group-append btn btn-outline-secondary calendar" (click)="date.toggle()"
+              type="button"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mt-4 mb-4">
+      <div class="form-group row w-50">
+        <label for="status" class="col-md-4 col-form-label">Military Status:</label>
+        <div class="col-md-7">
+          <select class="form-control form-select" id="status" formControlName="status">
+            <option selected></option>
+            <option *ngFor="let status of militaryStatus">
+              {{status}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-success " [disabled]="!profileForm.valid">Save</button> |
+      <button type="button" class="btn btn-primary " (click)="onShow()">Show Data</button>
+    </div>
+  </form>
+</div>
